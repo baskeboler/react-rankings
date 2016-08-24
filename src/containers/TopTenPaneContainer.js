@@ -5,7 +5,8 @@ import TopTenPane from '../TopTenPane';
 const mapStateToProps = (state) => {
   return {
     users: state.users,
-    page: state.page
+    page: state.page,
+    selectedUser: state.selectedUser
   };
 }
 

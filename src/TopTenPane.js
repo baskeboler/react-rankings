@@ -13,11 +13,15 @@ class TopTenPane extends Component {
     this.getCountries=this.getCountries.bind(this);
     this.changePage=this.changePage.bind(this);
     this.getPagination=this.getPagination.bind(this);
+    this.isSelected=this.isSelected.bind(this);
     console.log(this.getCountries());
+  }
+  isSelected(u) {
+    return u.email == this.props.selectedUser.email;
   }
   renderPos(u) {
       return (
-        <RankingPosition key={u.score} user={u} onSelect={this.props.onSelect} />
+        <RankingPosition key={u.score} user={u} onSelect={this.props.onSelect} isSelected={this.isSelected(u)}/>
       );
   }
 
@@ -75,6 +79,12 @@ TopTenPane.propTypes = {
     credits: PropTypes.number,
     score: PropTypes.number
   })),
+  selectedUser:PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    credits: PropTypes.number,
+    score: PropTypes.number
+  }),
   onSelect: PropTypes.func.isRequired
 };
 

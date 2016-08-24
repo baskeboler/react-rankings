@@ -5,7 +5,7 @@ import UserInfoPaneContainer from './containers/UserInfoPaneContainer';
 import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Row, Col} from 'react-bootstrap';
-import UserSettingsPane from './UserSettingsPane';
+import UserSettingsPaneContainer from './containers/UserSettingsPaneContainer';
 import {selectUser, saveUser, changePage, addUser} from './actions';
 import {dispatch} from 'redux';
 class App extends Component {
@@ -36,18 +36,13 @@ class App extends Component {
         <Row>
           <Col md={6}>
             <TopTenPaneContainer/>
-
           </Col>
           <Col md={6}>
             <UserInfoPaneContainer  />
-            <UserSettingsPane
-              user={this.state.users[Object.keys(this.state.users)[0]]}
-              onSave={this.saveUser} />
+            <UserSettingsPaneContainer />
           </Col>
         </Row>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
       </div>
     );
   }

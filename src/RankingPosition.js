@@ -11,7 +11,8 @@ class RankingPosition extends Component {
   }
   render() {
       return (
-          <ListGroupItem header={this.props.user.name} onClick={this.handleSelect}>
+          <ListGroupItem header={this.props.user.name} onClick={this.handleSelect}
+              bsStyle={this.props.isSelected?"info":""}>
             {this.props.user.username}
             <Badge pullRight>
               {this.props.user.score}
@@ -27,7 +28,8 @@ RankingPosition.propTypes = {
     credits: PropTypes.number,
     email: PropTypes.string,
   }),
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
+  isSelected: PropTypes.boolean
 };
 
 export default RankingPosition;
