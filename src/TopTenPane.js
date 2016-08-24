@@ -1,13 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import RankingPosition from './RankingPosition';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Pagination } from 'react-bootstrap';
 
 class TopTenPane extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activePage: 1
+    };
     this.getTopTen=this.getTopTen.bind(this);
     this.renderPos=this.renderPos.bind(this);
     this.getCountries=this.getCountries.bind(this);
+    this.changePage=this.changePage.bind(this);
+    this.getPagination=this.getPagination.bind(this);
     console.log(this.getCountries());
   }
   renderPos(u) {
@@ -25,19 +30,52 @@ class TopTenPane extends Component {
   }
 
   getTopTen() {
+    var start = (this.state.activePage -1)*10,
+    end = start+9;
     return Object.keys(this.props.users).map((k) => {
       return this.props.users[k];
     }).sort((a, b) => {
       return b.score - a.score;
-    }).slice(0,9);
+    }).slice(start, end);
+  }
+  changePage(page) {
+    this.setState({activePage: page});
+  }
+  getPagination() {
+    return (
+      <Pagination
+        prev
+        next
+        first
+        last
+        ellipsis
+        boundaryLinks
+        items={10}
+        maxButtons={5}
+        activePage={this.state.activePage}
+        onSelect={this.changePage}
+      />
+    )
   }
   render() {
     return (
-      <ListGroup >
+      <div>
+        {this.getPagination()}
+        <ListGroup >
         {this.getTopTen().map(this.renderPos)}
-      </ListGroup>
+        </ListGroup>
+      </div>
     );
   }
 }
+TopTenPane.propTypes = {
+  users: PropTypes.objectOf(PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    credits: PropTypes.number,
+    score: PropTypes.number
+  })),
+  onSelect: PropTypes.func.isRequired
+};
 
 export default TopTenPane;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { ListGroupItem, Badge } from 'react-bootstrap';
 
 class RankingPosition extends Component {
@@ -20,5 +20,14 @@ class RankingPosition extends Component {
       );
   }
 }
+RankingPosition.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    score: PropTypes.number,
+    credits: PropTypes.number,
+    email: PropTypes.string,
+  }),
+  onSelect: PropTypes.func.isRequired
+};
 
 export default RankingPosition;
