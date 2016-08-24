@@ -69,7 +69,7 @@ class TopTenPane extends Component {
   }
 }
 TopTenPane.propTypes = {
-  users: PropTypes.objectOf(PropTypes.shape({
+  users: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     email: PropTypes.string,
     credits: PropTypes.number,
